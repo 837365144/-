@@ -132,20 +132,18 @@
                     <tbody id= "delete{{ b.book.book_id }}" data-stock="22388" data-offline="false" data-productid="24147882" data-timestamp="1484488454000" data-orderforspupormo="0"><tr id="tr_424893864" class="  ">
         <td class="row1"> <a href="javascript:void(0)" data-item="424893864"  id ="checkded" class="fn-product-check checknow check_on">选中</a> </td> <td class="row_img"> <a href="http://product.dangdang.com/24147882.html" target="_blank" dd_name="查看详情"> <img onmouseout="$(this).parent().next().hide()" onmouseover="$(this).parent().next().show()" src="{{ b.book.product_image_path }}" width="80" height="80"> </a> <div style="display: none;" class="img_big"><a href="http://product.dangdang.com/24147882.html" dd_name="查看详情" target="_blank"><img src="http://img3x2.ddimg.cn/0/17/24147882-1_b.jpg"></a><span class="arrow"></span></div> </td> <td class="row_name"> <div class="name"> <a href="http://product.dangdang.com/24147882.html" title="{{ b.book.book_name }}" target="_blank" dd_name="查看详情" style="word-break:break-all;  word-wrap:break-word;">{{ b.book.book_name }}</a></div></td> <td class="row3">¥<span>{{ b.book.book_dprice }}</span></td> <td data-minbuy="0" class="fn-count-tip row3 "><span class="amount fn-updatecount " data-value="1">
         <a dd_name="减少数量" href="javascript:void(0)" id="min{{ b.book.book_id }}" onclick="min1({{ b.book.book_id }}) ">-</a>
-        <input data-value="1" value="{{ b.amount }}" type="text" id="quantity{{ b.book.book_id }} " onkeyup="value=value.replace(/[^\d]/g, '')"
->
-        <a dd_name="增加数量" href="javascript:void(0)" id="add{{ b.book.book_id }}" onclick="add({{ b.book.book_id }})">+</a>
+        <input data-value="1" value="{{ b.amount }}" type="text" id="quantity{{ b.book.book_id }}"  onkeyup="value=value.replace(/[^\d]/g, '')">
+        <a dd_name="增加数量" href="javascript:void(0)" id="add{{ b.book.book_id }}" onclick="add('{{ b.book.book_id }}')">+</a>
     </span></td> <td class="row4"><span class="red" id = "total_dprice{{ b.book.book_id }}">￥{% widthratio b.book.book_dprice 1 b.amount %}</span></td>
         <td class="row5 "><span><a href="javascript:void(0)" data-item="424893864" class="fn-add-wish" dd_name="加入收藏按钮">移入收藏</a></span><span><a href="javascript:void(0)" data-item="424893864" class="fn-remove-product" dd_name="删除普通品" onclick="del_book({{ b.book.book_id }})">删除</a></span></td> </tr></tbody>
             {% endif %}
-
         {% endfor %}
         <script>
-
             function add(book_id){
-
                 var t = $("#quantity"+book_id);
+                console.log(t);
                 t.val(parseInt(t.val())+1);
+                console.log(t.val());
                 $("#min"+book_id).removeAttr("disabled");                 //当按加1时，解除$("#min")不可读状态
 {#                setTotal();#}
                 var amount = Number(1);
