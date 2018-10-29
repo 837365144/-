@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load division_tags %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="/static/js/jquery_1.8.js"></script>
+    <script src="/static/js/jquery_cookie.js"></script>
+	<link rel="shortcut icon" href="/static/images/favicon.ico?v=20160901" type="image/x-icon">
+    <link href="/static/css/shopping_cart_new.css" rel="stylesheet" type="text/css">
+	<link href="/static//static/css/footer_150526.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style="padding-bottom:82px">
+
+<link href="/static/css/header_960_150611.css" rel="stylesheet" type="text/css">
+<script src="/static/js/pagetop2015_0827.js" charset="gb2312" type="text/javascript"></script>
+
+<div id="hd">
+<div id="tools">
+<div class="tools">
+    <div class="ddnewhead_operate" dd_name="顶链接">
+        
+        <div class="ddnewhead_welcome" display="none;">
+            <span id="nickname"><span class="hi">Hi，<a href="http://myhome.dangdang.com/" class="login_link" target="_blank">
+                {% if flag == "1" %}
+                    <b>{{ user.0.user_name }}</b><a href="{% url 'order:index:page' %}?flag=0" target="_self" id="quit_btn">[退出]</a></span>
+                {% else %}
+                    <span id="nickname"><span class="hi hi_none">欢迎光临当当，请</span><a href="{% url 'user:login:page' %}" class="login_link">登录</a><a href="{% url 'user:register:page' %}">免费注册</a>
+                {% endif %}
+            <div class="tel_pop" style="display:none" id="__ddnav_sjdd" onmouseover="showgaoji('a_phonechannel','__ddnav_sjdd');" onmouseout="hideotherchannel('a_phonechannel','__ddnav_sjdd');">
+                <a target="_blank" href="http://t.dangdang.com/20130220_ydmr" class="title"><i class="icon_tel"></i>手机当当</a><i class="title_shadow"></i>
+                <ul class="tel_pop_box">
+                    <li><a href="http://t.dangdang.com/20130220_ydmr" dd_name="手机二维码"><span>当当手机客户端</span><img src="http://img3.ddimg.cn/00363/doc/erweima2.png"><span class="text">随手查订单<br>随时享优惠</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="new_head_znx" id="znx_content" style="display:none;"></div>
+    </div>
+</div>
+</div>
+<div id="header_end"></div>
+<!--CreateDate  2016-09-28 11:30:01--></div>
+<form action="http://search.dangdang.com/search.aspx" id="bootpagetopSearch" name="bootpagetopSearch" method="GET"></form>
+<script type="text/javascript">var nick_num = 0;initHeaderOperate();</script><script type="text/javascript" src="http://orderb.dangdang.com/queryunpaid?callback=Unpaid_Data"></script>
+		<div class="shoppingcart_wrapper" id="ad_cpt_11850"><div><a href="http://a.dangdang.com/tjump.php?q=ddo84XQOf357bOs8tXGg5%2F%2F0oVoDImt3DFWsMqu7ZMSVsfUMeOQJueASNiMLjq%2FdrXMLCKnVfyKEahteAh1ih%2ByKYrKGzhvL20LVbDzObRambBA0YPpivy5hR5foQ4Rt%2BTB" target="_blank" rel="nofollow"><img src="http://img62.ddimg.cn/2017/1/11/2017011111344969879.jpg"></a></div></div>
+<div class="logo_line">
+    <div class="w960">
+        <div class="shopping_procedure01 shopping_procedure "><span>我的购物车</span><span class="current">填写订单</span><span>完成订单</span></div>
+        <div class="logo"><a href="#"><img src="/static/images/bz_logo_car.jpg" alt=""></a></div>
+    </div>
+</div>
+<div class="indent_con">
+    <form action="{% url 'order:close:address' %}?user_id={{ user.0.id }}&flag={{ flag }}&user_name={{ user.0.user_name }}" method="post" id="address">
+    {% csrf_token %}
+	<div class="shdz">
+    	<h3>收货相关信息</h3>
+        <ul class="shdz_con">
+            <p>▪ 收货地址</p>
+            <div class="address" id="dp_adress" style="float:right;">
+            <span class="icon_adr">&nbsp;</span>配送地址：
+            <div class="select_add">
+                <select name="have_address" id="have_address">
+                    <option value="1" >默认地址</option>
+{#                <p style="display: none;" value="1" name="address">123</p>#}
+{#                    <input type="hidden" value="1" name="address" style="display: none;">#}
+                    {% for a in address %}
+{#                        <input type="hidden" value="{{ a.id }}" name="address_x" style="display: none;">#}
+                        <option value="{{ a.name }},{{ a.detail_address }},{{ a.zipcode }},{{ a.telphone }},{{ a.addr_mobile }},{{ a.id }}">{{ a.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <!--<a href="#" class="tip"></a>-->
+            <span class="tip_c" style="display:none;">针对不同配送地址，您的货物可能出现缺货或无货状态，敬请谅解。</span>
+        </div>
+        	<li><label><strong>*</strong>收&nbsp;&nbsp;货&nbsp;&nbsp;人：</label><input type="text" name="consignee"  id="consignee" ><span id="spn_ship_man" class="hint new_tip" style="display: block;">请填写收货人姓名</span></li>
+            <li>
+                <label><strong>*</strong>收货地区：</label> 
+                <select id="country_id" name="country_id"><option value="9000">中国</option></select>
+                <select id="province_id" name="province_id" ><option value="0">--请选择--</option></select>
+                    <select id="city_id" name="city_id"><option value="0">--请选择--</option></select>
+                    <select id="town_id" name="town_id" ><option value="0">--请选择--</option></select>
+{#                    <select id="quarter_id" name="quarter_id" ><option value="0">--请选择--</option></select></li>#}
+            <li><label><strong>*</strong>详细地址：</label><input type="text" name="detailed_address" id="detailed_address"></li>
+            <li><label><strong>*</strong>邮政编码：</label><input type="text" name="postal_code"  id="postal_code"></li>
+            <li><label><strong>*</strong>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</label><input type="text" name="phone" id="phone"><label>或&nbsp;&nbsp;固定电话</label><input type="text" name="fixed_line_telephone" id="fixed_line_telephone" ></li>
+             
+        </ul>
+        <script type="text/javascript"></script>
+        <script src="/static/jq/jquery.js"></script>
+        <script>
+
+        var iNum1 ;
+        var iNum2;
+        var aProvince = ['北京市','天津市','山西省'];
+        var aCity =[['北京市'],['天津市'],['太原市','大同市','晋城市','朔州市','晋中市','长治市','阳泉市','吕梁市','忻州市','临汾市','运城市']];
+        var aCountry =[[['东城区','西城区','崇文区', '宣武区', '朝阳区', '海淀区', '丰台区', '石景山区', '房山区', '通州区', '顺义区', '门头沟区', '昌平区', '大兴区', '怀柔区', '平谷区', '密云县', '延庆县']],
+                    [['和平区', '河东区','河西区', '南开区', '河北区', '红桥区', '塘沽区', '汉沽区', '大港区', '东丽区', '西青区', '津南区', '北辰区', '武清区', '宝坻区', '宁河县', '静海县', '蓟县']],
+                    [['小店区', '迎泽区', '杏花岭区', '尖草坪区', '万柏林区', '晋源区', '清徐县', '古交市'],
+                    ['城区' ,'矿区' ,'南郊区' ,'新荣区', '大同县', '天镇县', '灵丘县', '阳高县', '左云县', '广灵县', '浑源县'],
+                    ['城区' ,'高平市' ,'泽州县' ,'陵川县', '阳城县', '沁水县'],
+                    ['朔城区' ,'平鲁区' ,'山阴县' ,'右玉县', '应县', '怀仁县'],
+                    ['榆次区' ,'介休市' ,'昔阳县' ,'灵石县', '祁县', '左权县','寿阳县','太谷县','和顺县','平遥县','榆社县'],
+                    ['城区' ,'郊区' ,'潞城市' ,'长治县', '长子县', '平顺县','襄垣县','沁源县','屯留县','黎城县','武乡县','沁县','壶关县'],
+                    ['城区' ,'矿区' ,'郊区' ,'平定县', '盂县'],
+                    ['离石市' ,'孝义市' ,'汾阳市' ,'文水县', '中阳县 ', '兴县','临县','方山县','柳林县','岚县','交口县','交城县','石楼县'],
+                    ['忻府区' ,'原平市' ,'代县' ,'神池县', '五寨县 ', '五台县','偏关县','宁武县','静乐县','繁峙县','河曲县','保德县','定襄县','岢岚县'],
+                    ['尧都区' ,'侯马市' ,'霍州市' ,'汾西县', '吉县 ', '安泽县','大宁县','浮山县','古县','隰县','襄汾县','翼城县','蒲县','永和县','乡宁县','曲沃县','洪洞县'],
+                    ['盐湖区' ,'河津市' ,'永济市' ,'闻喜县', '新绛县', '平陆县','垣曲县','绛县','稷山县','芮城县','万荣县',' 临猗县','夏县']]];
+            $("#have_address").change(function() {
+                var address_1 = $(this).children('option:selected');
+                var index = $(this).children('option:selected').index();
+                var address_2 = address_1.val();
+                var address = address_2.split(',');
+                console.log(address);
+                var consignee = address[0];
+                var province_id = address[2];
+                var detailed_address = address[5];
+                var postal_code = address[6];
+                var fixed_line_telephone = address[7];
+                var phone = address[8];
+                if (index >= 1) {
+                    $("#consignee").attr("readonly", true);
+                    $("#consignee").val(consignee);
+                    $("#detailed_address").attr("readonly", true);
+                    $("#detailed_address").val(detailed_address);
+                    $("#postal_code").attr("readonly", true);
+                    $("#postal_code").val(postal_code);
+                    $("#phone").attr("readonly", true);
+                    $("#phone").val(phone);
+                    $("#fixed_line_telephone").attr("readonly", true);
+                    $("#fixed_line_telephone").val(fixed_line_telephone);
+                    $('#province_id').find('option').eq(0).html(address[2]);
+                    $('#city_id').find('option').eq(0).html(address[3]);
+                    $('#town_id').find('option').eq(0).html(address[4]);
+                    $("#province_id").children().last().attr("selected", true);
+                    $("#province_id").attr("disabled", true);
+                    $("#city_id").children().last().attr("selected", true);
+                    $("#city_id").attr("disabled", true);
+                    $("#town_id").children().last().attr("selected", true);
+                    $("#town_id").attr("disabled", true);
+                } else {
+                    $('#province_id').children().not(':eq(0)').remove();
+                    $('#city_id').children().not(':eq(0)').remove();
+                    $('#town_id').children().not(':eq(0)').remove();
+                    $('#province_id').find('option').eq(0).html('--请选择--');
+                    $('#city_id').find('option').eq(0).html('--请选择--');
+                    $('#town_id').find('option').eq(0).html('--请选择--');
+                    $('#province_id').find('option').eq(0).css("display", 'none');
+                    $('#city_id').find('option').eq(0).css("display", 'none');
+                    $('#town_id').find('option').eq(0).css("display", 'none');
+                    $("#consignee").attr("readonly", false);
+                    $("#consignee").val('');
+                    $("#detailed_address").attr("readonly", false);
+                    $("#detailed_address").val('');
+                    $("#postal_code").attr("readonly", false);
+                    $("#postal_code").val('');
+                    $("#phone").attr("readonly", false);
+                    $("#phone").val('');
+                    $("#fixed_line_telephone").attr("readonly", false);
+                    $("#fixed_line_telephone").val('');
+                    $("#province_id").children().last().attr("selected", false);
+                    $("#province_id").attr("disabled", false);
+                    $("#city_id").children().last().attr("selected", false);
+                    $("#city_id").attr("disabled", false);
+                    $("#town_id").children().last().attr("selected", false);
+                    $("#town_id").attr("disabled", false);
+                    for (var i = 0; i < aProvince.length; i++) {
+                        $('#province_id').append('<option>' + aProvince[i] + '</option>');
+                    }
+                    ;
+                    $('#province_id').change(function () {
+                        console.log(aCity[1][0]);
+                        $('#city_id').children().not(':eq(0)').remove();
+                        $('#town_id').children().not(':eq(0)').remove();
+                        iNum1 = $(this).children('option:selected').index();
+                        console.log(iNum1)
+                        var aaCity = aCity[iNum1 - 1];
+                        for (var j = 0; j < aaCity.length; j++) {
+                            $('#city_id').append('<option>' + aaCity[j] + '</option>');
+                        }
+                    });
+                    $('#city_id').change(function () {
+                        $('#town_id').children().not(':eq(0)').remove();
+                        iNum2 = $(this).children('option:selected').index();
+                        var aaCountry = aCountry[1 - 1][iNum2 - 1];
+                        for (var k = 0; k < aaCountry.length; k++) {
+                            $('#town_id').append('<option>' + aaCountry[k] + '</option>');
+                        }
+                    })
+                }
+            });
+        for (var i = 0; i < aProvince.length; i++) {
+                        $('#province_id').append('<option>' + aProvince[i] + '</option>');
+                    }
+                    ;
+                    $('#province_id').change(function () {
+                        console.log(aCity[1][0]);
+                        $('#city_id').children().not(':eq(0)').remove();
+                        $('#town_id').children().not(':eq(0)').remove();
+                        iNum1 = $(this).children('option:selected').index();
+                        console.log(iNum1)
+                        var aaCity = aCity[iNum1 - 1];
+                        for (var j = 0; j < aaCity.length; j++) {
+                            $('#city_id').append('<option>' + aaCity[j] + '</option>');
+                        }
+                    });
+                    $('#city_id').change(function () {
+                        $('#town_id').children().not(':eq(0)').remove();
+                        iNum2 = $(this).children('option:selected').index();
+                        var aaCountry = aCountry[1 - 1][iNum2 - 1];
+                        for (var k = 0; k < aaCountry.length; k++) {
+                            $('#town_id').append('<option>' + aaCountry[k] + '</option>');
+                        }
+                    })
+    </script>
+
+
+        <script type="text/javascript"></script>
+        <script src="/static/jq/jquery.js"></script>
+        <script>
+            $("#consignee").blur(function(){
+               var consignee_1 = $("#consignee").val()
+                if(consignee_1.length == 0){
+                    $("#spn_ship_man").html("收货人姓名不能为空");
+                    $("#spn_ship_man").css("color","red");
+                }else{
+                    $("#spn_ship_man").html("   ");
+                    $("#spn_ship_man").css("color","red");
+                }
+            });
+        </script>
+
+
+
+
+        <div class="balance"><pv class="total_price">商品金额：¥{{ shopping_cart.total_price }}</pv><p class="yfze">应付总额（含运费）：<em class="total_price">¥{{ shopping_cart.total_price }}</em></p><p><a href="javascript:void(0)"><input type="submit" value="提交订单" ></a>
+            </p></div>
+    </div>
+    </form>
+    <div class="shdz">
+    	<h3>订单1（百知网配送）</h3>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tbody><tr style="height:30px; line-height:30px;">
+                <th width="34%">商品名称</th>
+                <th width="11%">所在仓库</th>
+                <th width="13%">百知价</th>
+                <th width="11%">促销价</th>
+                <th width="9%">数量</th>
+                <th width="11%">小计</th>
+                <th width="11%">操作</th>
+            </tr>
+            
+                {% for b in shopping_cart.cartltems %}
+                    {% if b.amount %}
+                        <tr id = "book{{ b.book.book_id }}">
+                            <td>{{ b.book.book_name }}</td>
+                            <td align="center">{{ b.book.book_publish }}</td>
+                            <td align="center">¥{{ b.book.book_dprice }}（{{ b.book.book_dprice|div:b.book.book_price }}折）</td>
+                            <td align="center">--</td>
+                            <td align="center">{{ b.amount }}</td>
+                            <input type="hidden" value="{{ b.amount }}" id="quantity{{ b.book.book_id }}">
+                            <td align="center">¥{% widthratio b.book.book_dprice 1 b.amount %}</td>
+                            <td align="center"><a href="javascript:void(0)" onclick="omit({{ b.book.book_id }})">放回购物车</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+            <script>
+                function omit(book_id){
+                    var t = $("#quantity"+book_id);
+{#                        $("#min").attr("disabled","disabled")        //当$("#min")为1时，$("#min")不可读状态#}
+                           ret = confirm("你确定要删除吗？");
+                           if(ret){
+                                var amount = Number(-parseInt(t.val()));
+                                $.ajax({
+                                    type:"get",
+                                    url:'{% url 'order:index:modify' %}',
+                                    data:"book_id="+book_id+"&amount="+amount,
+                                    success:function(a){
+                                        var msg = a;
+                                        console.log(msg);
+{#                                        t.parent().parent().prev().child().html((parseInt(t.val())*t.parent().parent().prev().child().text()).toFixed(2));#}
+                                        $(".total_price").html("￥"+a.total_price);
+                                        $("#book"+book_id).css("display","none")
+                                    }
+                                })
+
+
+                           }
+
+                }
+            </script>
+
+
+
+                     <tr>
+                        <td colspan="2"><input type="checkbox" >此订单作为礼品赠送他人</td>
+                        <td colspan="2"><strong>运费：</strong>当确认送货方式后显示</td>
+                        <td class="table_zj" colspan="3"><strong>小计总额：</strong><em class="total_price">¥{{ shopping_cart.total_price }}</em></td>
+                    </tr>
+                
+            
+                
+            
+        </tbody></table>
+    </div>
+     
+</div>
+
+<div id="footer">
+<div class="footer">
+	<div class="footer_nav_box">
+		<div class="footer_copyright"><span>Copyright (C) 当当网 2004-2014, All Rights Reserved</span><a href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202001051000098" target="_blank" class="footer_img" rel="nofollow"><img src="http://img4.dangdang.com/bottom/validate.gif"></a><span><a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow">京ICP证041189号</a></span><span>出版物经营许可证&nbsp;新出发京批字第直0673号</span></div>
+	</div>
+</div>
+</div>
+    <div class="foot_tip_ad">广告</div>
+    <style>
+        .foot_tip_ad { width:40px; height:40px; font:12px/40px "simsun"; text-align:center; color:#fff; background-color:#474747; position:fixed; right:0; bottom:10px;_position:absolute; _bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+    </style>
+
+
+</body>
+</html>

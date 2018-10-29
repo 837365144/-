@@ -1,0 +1,104 @@
+<style>
+	.d1{
+		background-color: rgb(53,60,68);
+		position: relative;
+		height: 30px;
+		line-height: 30px;
+		padding-left: 10px;
+	}
+	.s1{
+		font-size: 12px;
+		color: white;
+	}
+	.s2{
+		position: absolute;
+		right: 10px;
+	}
+	.s2 a{
+		color: white;
+		font-size: 12px;
+		text-decoration: none;
+	}
+	.t1{
+		border-color:aliceblue;
+		margin-top: 2px;
+		font-size: 12px;
+		text-align: center;
+		background-color: rgb(230,242,254);
+	}
+	.bottom{
+		font-size: 13px;
+		padding-left: 15px;
+		position: relative;
+	}
+	.bs{
+		position: absolute;
+		right: 40px;
+	}
+	.bs a{
+		text-decoration: none;
+		color: black;
+	}
+	.bs a:hover{
+		color: cornflowerblue;
+		text-decoration: underline;
+	}
+</style>
+<div class="d1">
+	<span class="s1">管理人员基本信息表</span>
+	<span class="s2">
+		<a href="#">添加</a>
+		<a href="#">删除</a>
+	</span>
+</div>
+<table border="2" width="100%" cellspacing="0" class="t1">
+	<tr>
+		<td>
+			<input type="checkbox" />
+		</td>
+		<td>商品ID</td>
+		<td>商品名称</td>
+		<td>作者</td>
+		<td>出版社</td>
+		<td>市场价</td>
+		<td>当当价</td>
+		<td>库存</td>
+		<td>商品种类</td>
+		<td>基本操作</td>
+	</tr>
+    {% for b in page %}
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>{{ b.book_id }}</td>
+            <td>{{ b.book_name }}</td>
+            <td>{{ b.book_author }}</td>
+            <td>{{ b.book_publish }}</td>
+            <td>{{ b.book_price }}</td>
+            <td>{{ b.book_dprice }}</td>
+            <td>{{ b.stock }}</td>
+            <td>{{ b.book_category.category_name }}</td>
+            <td>基本操作</td>
+	    </tr>
+    {% endfor %}
+
+</table>
+<div class="bottom">
+	共有{{ length }} 条记录，当前第{{ page.number }}页，共{{ page.paginator.num_pages }}页
+	<span class="bs">
+{#        上一页#}
+        {% if page.has_previous %}
+		    <a href="{% url 'commodity_management:list:page' %}?num={{ page.pervious_page_number }}" style="margin-right: 20px;">上一页</a>
+        {% else %}
+            <a href="#" style="margin-right: 20px; display: none">上一页</a>
+        {% endif %}
+
+{#        下一页#}
+		{% if page.has_next %}
+		    <a href="{% url 'commodity_management:list:page' %}?num={{ page.next_page_number }}" style="margin-right: 20px;">下一页</a>
+        {% else %}
+            <a href="#" style="margin-right: 20px; display: none">下一页</a>
+        {% endif %}
+	</span>
+</div>
